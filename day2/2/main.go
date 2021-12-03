@@ -8,8 +8,9 @@ import (
 )
 
 type submarine struct {
-	X int // horizontal position
-	Y int // depth position
+	Aim int
+	X   int
+	Y   int
 }
 
 //go:embed input
@@ -17,12 +18,12 @@ var input string
 
 func main() {
 	inputs := strings.Split(input, "\n")
-	sub := submarine{0, 0}
+	sub := submarine{0, 0, 0}
 
 	for _, input := range inputs {
 		sub.Move(input)
 	}
-	fmt.Printf("Final position X: %d, Y: %d - multiple is %d", sub.X, sub.Y, sub.X*sub.Y)
+	fmt.Printf("Final position Aim: %d, X: %d, Y: %d - multiple is %d", sub.Aim, sub.X, sub.Y, sub.X*sub.Y)
 }
 
 func (s *submarine) Move(command string) {
@@ -39,10 +40,11 @@ func (s *submarine) Move(command string) {
 	switch parts[0] {
 	case "forward":
 		s.X += intVal
+		s.Y += s.Aim * intVal
 	case "down":
-		s.Y += intVal
+		s.Aim += intVal
 	case "up":
-		s.Y -= intVal
+		s.Aim -= intVal
 	default:
 		fmt.Println("No command for " + parts[0] + " - skipping...")
 	}
