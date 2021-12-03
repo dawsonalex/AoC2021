@@ -12,10 +12,9 @@ import (
 var input string
 
 func main() {
-	// TODO: THIS DOESN'T WORK
 	measurements := strings.Split(input, "\n")
 	var lastSum, greaterSums int
-	for i := 0; i < len(measurements); i += 2 {
+	for i := 0; i < len(measurements); i++ {
 		if i+3 >= len(measurements) {
 			break
 		}
